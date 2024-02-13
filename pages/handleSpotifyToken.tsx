@@ -35,7 +35,7 @@ const HandleSpotifyToken = () => {
     } else {
       setError("Missing necessary authorization information.");
     }
-  }, [router, user?.recommendations]); // Depend on user.recommendations to re-evaluate when it changes
+  }, [router, user?.recommendations, user]); // Depend on user.recommendations to re-evaluate when it changes
 
 
   return (

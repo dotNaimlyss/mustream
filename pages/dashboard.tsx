@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { MUSIC_GENRES, ARTISTS } from "../models/selection";
 import React, { useState, useEffect } from "react";
 import SearchComponent from "../components/searchComponent";
-import { handleSongClick } from "./services/songClick";
+import { handleSongClick } from "../lib/songClick";
 
 const Dashboard: React.FC = () => {
   const user = useSelector((state: RootState) => state.user.user);
@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
     }else if (user?.recommendations && (user.recommendations.length ?? 0) >9){
       setCurrentStep("recommendations")
     }
-  }, [user]);
+  }, [user, router]);
 
   useEffect(() => {
     // Fetching data or updating state here

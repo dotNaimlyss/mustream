@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import SearchComponent from "../components/searchComponent";
-import { handleSongClick } from "./services/songClick";
+import { handleSongClick } from "../lib/songClick";
 import type { RootState } from "../redux/store";
 import type { ITrack } from "../models/Track";
 

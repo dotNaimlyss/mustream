@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { setUser } from "../redux/userSlice";
 import { LoadingIndicator } from "./loadingIndicator";
-import { handleSongClick } from "../pages/services/songClick";
+import { handleSongClick } from "../lib/songClick";
 import { SearchIcon } from "@heroicons/react/solid";
 
 const SearchComponent = () => {

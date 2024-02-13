@@ -1,4 +1,4 @@
-import { User } from "../../redux/userSlice";
+import { User } from "../redux/userSlice";
 
 export const fetchGuestRecommendations = async ({user, selectedGenres, selectedArtists}) => {
     try {

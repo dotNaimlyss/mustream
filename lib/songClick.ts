@@ -1,6 +1,6 @@
 import { createHash } from "crypto";
-import { Song, type User } from "../../redux/userSlice";
-import { ITrack } from "../..//models/Track";
+import { Song, type User } from "../redux/userSlice";
+import { ITrack } from "../models/Track";
 import router from "next/router";
 
 const createSessionId = (trackName: string, artistName: string): string => {
