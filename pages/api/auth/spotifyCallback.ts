@@ -1,5 +1,3 @@
-// /pages/api/spotify/callback.ts
-
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -12,15 +10,15 @@ export default async function handler(
     const parsedState = JSON.parse(decodeURIComponent(state.toString()));
     returnUrl = parsedState.returnUrl || returnUrl;
   }
-  const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID; // Set your Spotify client ID in .env.local
-  const clientSecret = process.env.SPOTIFY_CLIENT_SECRET; // Set your Spotify client secret in .env.local
+  const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID; 
+  const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
   const redirectUri = `http://localhost:3000/api/auth/spotifyCallback`;
 
   if (!code) {
     return res.status(400).send("Spotify code is required");
   }
   try {
-    // Exchange the code for an access token
+    // Exchange the code for an access token connecting with the spotify api 
 
     const base64Credentials = Buffer.from(
       `${clientId}:${clientSecret}`
@@ -47,8 +45,7 @@ export default async function handler(
       return res.status(400).json(tokenData);
     }
 
-    // Assuming tokenData is an object with access_token, expires_in, and refresh_token properties
-    const { access_token, expires_in, refresh_token } = tokenData; // Destructure your tokenData object
+    const { access_token, expires_in, refresh_token } = tokenData; // Destructuring the token data object
     const clientRedirectUri = `${
       process.env.NEXT_PUBLIC_BASE_URL
     }/handleSpotifyToken?access_token=${encodeURIComponent(

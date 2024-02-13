@@ -1,10 +1,9 @@
-// pages/api/user/[userId]/updateRecommendations.js
 import dbConnect from "../../../lib/dbConnect";
 import User from "../../../models/User";
 import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
-  // Ensure that we're dealing with a PUT request
+  // Ensure that the request dealing with a PUT request
   if (req.method !== "PUT") {
     return res
       .status(405)
@@ -17,7 +16,7 @@ export default async function handler(req, res) {
   try {
     // Retrieve the user ID from the URL parameter and the Authorization header
     const authorizationHeader = req.headers.authorization;
-    // Check for the presence of the authorization header
+    // Checking the authorization header is available
     if (!authorizationHeader) {
       return res
         .status(401)
@@ -32,28 +31,26 @@ export default async function handler(req, res) {
       console.log("here");
       return res.status(403).json({ message: "unauthorized" });
     }
-    // Check if the user ID from the token matches the user ID in the URL parameter
 
-    // Extract recommendations from the request body
     const { user } = req.body; // Destructure the user object from req.body
-    console.log(`this is req body:`, user); // Log the user object to verify its structure
+    console.log(`this is req body:`, user); // for debugging purpose
 
     // Update the user's recommendations in the database
     const updatedUser = await User.findByIdAndUpdate(
       decodedToken._id,
       {
         $set: {
-          username: user.username,
-          like_genres: user.like_genres,
-          like_artists: user.like_artists,
-          recommended_songs: user.recommendations,
-          searched_songs: user.searched_songs,
+          username: decodedToken.username,
+          like_genres: decodedToken.like_genres,
+          like_artists: decodedToken.like_artists,
+          recommended_songs: decodedToken.recommendations,
+          searched_songs: decodedToken.searched_songs,
         },
       },
       { new: true }
     );
     console.log(`backend user:`, updatedUser);
-    // If the user wasn't found, return a 404 error
+    // If the updating process fail, return a 404 error
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -61,8 +58,7 @@ export default async function handler(req, res) {
     // Exclude the password when returning the updated user
     const { password, ...userWithoutPassword } = updatedUser.toObject();
 
-    // Return the updated user data minus the password
-    console.log("user search list updated");
+    // Return the updated user data without the password
     res.status(200).json(userWithoutPassword);
   } catch (error) {
     console.error("Failed to update recommendations:", error);

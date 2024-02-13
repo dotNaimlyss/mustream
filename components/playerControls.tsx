@@ -55,7 +55,7 @@ const PlayerControls = ({
   };
 
   return (
-    <div className="mt-5 relative bg-secondary text-white p-4 rounded-lg shadow-lg max-w-lg mx-auto">
+    <div className="mt-5 relative bg-primary text-white p-4 rounded-lg shadow-lg max-w-lg mx-auto">
   <h1 className="text-xl font-bold text-center mb-2">
      {trackname} 
   </h1><span className="text-m text-center">by {artistname}</span>
@@ -79,7 +79,7 @@ const PlayerControls = ({
   <div className="flex items-center justify-center space-x-4">
     <button
       onClick={onPlayPause}
-      className="bg-fifth hover:bg-secondary text-white w-12 h-12 rounded-full flex items-center justify-center focus:outline-none"
+      className="bg-fifth hover:bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center focus:outline-none"
     >
       {isPlaying ? "⏸" : "▶"} {/* Unicode icons for play and pause */}
     </button>

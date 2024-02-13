@@ -60,7 +60,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({
         key={index}
         className={`message-item flex ${msg.username === currentUser ? 'justify-end' : 'justify-start'}`}
       >
-        <div className={`rounded px-4 py-2 ${msg.username === currentUser ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>
+        <div className={`rounded px-4 py-2 ${msg.username === currentUser ? ' bg-gray-200 border-2 border-primary text-black' : 'bg-white border-2 border-forth text-gray-800'}`}>
           {msg.username !== currentUser && <span className="message-sender font-bold mr-2">{msg.username}:</span>}
           <span className="message-content">{msg.message}</span>
         </div>
@@ -69,14 +69,14 @@ const ChatComponent: React.FC<ChatComponentProps> = ({
   </ul>
   <div className="p-4 bg-gray-100 flex">
     <input
-      className="message-input flex-1 p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="message-input flex-1 p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary"
       value={input}
       onChange={(e) => setInput(e.target.value)}
       onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
       placeholder="Type your message here..."
     />
     <button
-      className="send-button bg-secondary hover:bg-primary text-white p-2 rounded-lg transition duration-150 mx-5"
+      className="send-button bg-primary hover:bg-secondary text-white p-2 rounded-lg transition duration-150 mx-5"
       onClick={sendChatMessage}
     >
       Send

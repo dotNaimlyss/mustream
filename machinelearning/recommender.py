@@ -90,15 +90,12 @@ def recommend_songs(user_like_genres, user_like_artists, top_k=10):
     genre_indices = torch.tensor([genre_to_idx.get(genre, -1) for genre in user_like_genres if genre in genre_to_idx], dtype=torch.long)
     artist_indices = torch.tensor([artist_to_idx.get(artist, -1) for artist in user_like_artists if artist in artist_to_idx], dtype=torch.long)
 
-    print("Genre indices:", genre_indices)
-    print("Artist indices:", artist_indices)
 
     song_indices = torch.arange(num_songs)
     with torch.no_grad():
         scores = model(genre_indices, artist_indices, song_indices)
 
     _, top_song_indices = torch.topk(scores, k=top_k)
-    print("Top song indices:", top_song_indices)
 
     recommended_songs = []  
     for idx in top_song_indices.tolist():  # Convert tensor to list of integers

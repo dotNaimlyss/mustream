@@ -83,7 +83,6 @@ const SessionPage: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        // Ensure you're securely sending the refresh token or any required data
       });
       const data = await response.json();
       if (data.accessToken) {
@@ -246,9 +245,6 @@ const SessionPage: React.FC = () => {
         artistname={decodedArtistName}
       />
       <div className="pt-4 px-4">
-        <div className="text-sm bg-secondary p-2 rounded text-white">
-          {user?.username} at Session: {sessionId}
-        </div>
         <ChatComponent
           sessionId={sessionId as string}
           selectedTrack={decodedTrackName}

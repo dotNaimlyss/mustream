@@ -1,7 +1,7 @@
 // models/User.js
-import Track from './Track';
-import mongoose, { Schema } from 'mongoose';
-import bcrypt from 'bcryptjs';
+import Track from "./Track";
+import mongoose, { Schema } from "mongoose";
+import bcrypt from "bcryptjs";
 
 interface IUser extends Document {
   _id: mongoose.Schema.Types.ObjectId;
@@ -13,7 +13,7 @@ interface IUser extends Document {
   recommended_songs: string[];
 }
 
-const UserSchema : Schema = new Schema({
+const UserSchema: Schema = new Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId,
     default: mongoose.Types.ObjectId,
@@ -22,39 +22,39 @@ const UserSchema : Schema = new Schema({
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
-  like_genres:{
-    type: Array
+  like_genres: {
+    type: Array,
   },
-  like_artists:{
-    type: Array
+  like_artists: {
+    type: Array,
   },
   searched_songs: [
     {
       type: Schema.Types.ObjectId,
-      ref: Track
-    }
+      ref: Track,
+    },
   ],
   recommended_songs: [
     {
       type: Schema.Types.ObjectId,
-      ref: Track
-    }
-  ]
+      ref: Track,
+    },
+  ],
 });
 
-UserSchema.pre('save', async function (next) {
-    if (this.isModified('password') || this.isNew) {
-      const salt = await bcrypt.genSalt(10);
-      this.password = await bcrypt.hash(this.password, salt);
-    }
-    next();
-  });
-  
-  const User = mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
-  export default User;
+UserSchema.pre("save", async function (next) {
+  if (this.isModified("password") || this.isNew) {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+  }
+  next();
+});
+
+const User = mongoose.models.User || mongoose.model<IUser>("User", UserSchema);
+export default User;

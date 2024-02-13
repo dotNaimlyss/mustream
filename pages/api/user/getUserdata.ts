@@ -19,7 +19,8 @@ export default async function handler(req, res) {
       return res.status(403).json({ message: "Unauthorized" });
     }
 
-    // Retrieve the user and populate the recommended_songs from the "tracks" collection
+    // Retrieve the user and populate the recommended_songs from the "tracks" collection since 
+    // these are mongoose objects I want to extract the data inside these objects
     const user = await User.findById(decodedToken._id)
       .populate('searched_songs')
       .populate('recommended_songs');
