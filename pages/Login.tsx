@@ -26,7 +26,7 @@ const LoginForm = () => {
   // Spotify Authorization Redirect
   const redirectToSpotifyAuthorization = () => {
     const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
-    const redirectUri = `${window.location.origin}/api/auth/spotifyCallback`;
+    const redirectUri = `https://mustream.vercel.app/api/auth/spotifyCallback`;
     const scope =
       "streaming user-read-email user-read-private ";
     const spotifyAuthUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=${encodeURIComponent(

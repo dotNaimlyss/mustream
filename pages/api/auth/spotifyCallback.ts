@@ -12,7 +12,7 @@ export default async function handler(
   }
   const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID; 
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-  const redirectUri = `http://localhost:3000/api/auth/spotifyCallback`;
+  const redirectUri = `https://mustream.vercel.app/api/auth/spotifyCallback`;
 
   if (!code) {
     return res.status(400).send("Spotify code is required");
