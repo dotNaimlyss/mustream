@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
   }, [selectedGenres, dispatch]);
 
   useEffect(() => {
-    if (selectedArtists.length >= 10) {
+    if (selectedArtists.length >= 3 ) {
       dispatch(setLikeArtists(selectedArtists));
     }
   }, [selectedArtists, dispatch]);
@@ -46,11 +46,9 @@ const Dashboard: React.FC = () => {
     if (user && user.recommendations && (user.recommendations?.length ?? 0) > 9 && user.password) {
       // If the user has recommendations, send to the homepage
       router.push("/HomePage");
-      setRecommendedsongs(user.recommendations); // Load existing recommendations into state
     }else if (user?.recommendations && (user.recommendations.length ?? 0) >9){
       setCurrentStep("recommendations")
     }
-    else setCurrentStep("genres")
   }, [user]);
 
   useEffect(() => {
@@ -77,6 +75,7 @@ const Dashboard: React.FC = () => {
       });
       if (response.ok) {
         const updatedUser = await response.json();
+        console.log(response)
         dispatch(setUser(updatedUser));
         console.log(`Updated User:`, updatedUser);
       } else if (response.status === 403) {
@@ -94,7 +93,7 @@ const Dashboard: React.FC = () => {
   const handleProceed = async (): Promise<void> => {
     setLoading(true); // Start loading
     try {
-      const updatedUser: User = {
+      const UserToFetch: User = {
         username: user?.username,
         like_genres: selectedGenres,
         like_artists: selectedArtists,
@@ -103,7 +102,7 @@ const Dashboard: React.FC = () => {
       const response = await fetch("http://localhost:4000/recommend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedUser),
+        body: JSON.stringify(UserToFetch),
       });
 
       if (response.ok) {
@@ -122,7 +121,6 @@ const Dashboard: React.FC = () => {
             recommendations: recommendations,
             searched_songs: user.searched_songs,
           };
-          console.log(`uuser:`, uuser);
           updateRegisteredUserData(uuser);
         } else {
           console.log("This is not a registered user");

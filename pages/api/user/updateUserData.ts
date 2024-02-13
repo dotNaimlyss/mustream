@@ -33,18 +33,20 @@ export default async function handler(req, res) {
     }
 
     const { user } = req.body; // Destructure the user object from req.body
-    console.log(`this is req body:`, user); // for debugging purpose
-
+    console.log(`decoded token id:`, decodedToken._id)
+    console.log(`decoded token like_genres:`, decodedToken.like_genres)
+    console.log(`decoded token like_artists:`, decodedToken.like_artists)
+    console.log(`decoded token recommendations:`, decodedToken.recommendations)
     // Update the user's recommendations in the database
     const updatedUser = await User.findByIdAndUpdate(
       decodedToken._id,
       {
         $set: {
-          username: decodedToken.username,
-          like_genres: decodedToken.like_genres,
-          like_artists: decodedToken.like_artists,
-          recommended_songs: decodedToken.recommendations,
-          searched_songs: decodedToken.searched_songs,
+          username: user.username,
+          like_genres: user.like_genres,
+          like_artists: user.like_artists,
+          recommended_songs: user.recommendations,
+          searched_songs: user.searched_songs,
         },
       },
       { new: true }

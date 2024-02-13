@@ -189,8 +189,8 @@ const SessionPage: React.FC = () => {
     if (event) {
       if (player && event !== undefined) {
         player.setVolume(event);
-        console.log(event);
       }
+      console.log(event)
     }
   };
 

@@ -18,6 +18,9 @@ export default async function handler(req, res) {
           {
             _id: user._id,
             username: user.username,
+            password: user.password,
+            like_genres: user.like_genres,
+            like_artists: user.like_artists,
             recommended_songs: user.recommended_songs,
             searched_songs: user.searched_songs,
           },

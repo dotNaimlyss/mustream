@@ -5,7 +5,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { code, state } = req.query; // The code Spotify returns
-  let returnUrl = "/HomePage";
+  let returnUrl = "/dashboard";
   if (state) {
     const parsedState = JSON.parse(decodeURIComponent(state.toString()));
     returnUrl = parsedState.returnUrl || returnUrl;

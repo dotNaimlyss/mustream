@@ -1,12 +1,13 @@
 // components/LoginForm.js
 import { jwtDecode } from "jwt-decode";
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 
 import { useDispatch } from "react-redux";
 import { Song, setUser } from "../redux/userSlice";
 
 interface CustomJwtPayload {
+  like_artists: string[];
+  like_genres: string[];
   password: string | undefined;
   _id?: string;
   username?: string;
@@ -45,6 +46,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    redirectToSpotifyAuthorization();
     const response = await fetch("/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -58,6 +60,7 @@ const LoginForm = () => {
       const decodedToken = jwtDecode<CustomJwtPayload>(token);
       console.log(`User ID: ${decodedToken._id}`);
       console.log(`Username: ${decodedToken.username}`);
+      console.log(`password :${decodedToken.password}` )
       console.log(`Recommended Songs: ${decodedToken.recommended_songs}`);
       console.log(`Searched Songs: ${decodedToken.searched_songs}`);
       dispatch(
@@ -65,13 +68,13 @@ const LoginForm = () => {
           _id: decodedToken._id,
           username: decodedToken.username,
           password: decodedToken.password,
-          like_genres: [], // Populate with actual data if needed
-          like_artists: [], // Populate with actual data if needed
+          like_genres: decodedToken.like_genres, 
+          like_artists: decodedToken.like_artists, 
           recommendations: decodedToken.recommended_songs,
           searched_songs: decodedToken.searched_songs,
         })
       );
-      redirectToSpotifyAuthorization();
+
     } else {
       const error = await response.json();
       console.error(`Login error: ${error.message}`);

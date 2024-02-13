@@ -10,21 +10,13 @@ const HandleSpotifyToken = () => {
   const user = useSelector((state: RootState) => state.user.user);
 
   useEffect(() => {
+    
     const { access_token, expires_in, refresh_token } = router.query;
     console.log(user)
-    const redirectUserBasedOnRecommendations = () => {
-      // Assuming user?.recommendations is an array
-      if (user && (user.recommendations?.length ?? 0) > 9) {
-        router.push("/HomePage").catch((err) => {
-          console.error("Failed to redirect to HomePage:", err);
-          setError("Failed to redirect to the homepage.");
-        });
-      } else {
-        router.push("/HomePage").catch((err) => {
-          console.error("Failed to redirect to dashboard:", err);
-          setError("Failed to redirect to the dashboard.");
-        });
-      }
+    const redirectUserBasedOnUserData = () => {
+      if(user && (user.like_artists.length > 3 || user.like_genres.length >3)){
+        router.push('/HomePage');
+      }else router.push('/dashboard');
     };
 
     if (access_token && expires_in && refresh_token) {
@@ -35,7 +27,7 @@ const HandleSpotifyToken = () => {
         localStorage.setItem("spotifyRefreshToken", refresh_token as string);
 
         // Check and redirect based on recommendations
-        redirectUserBasedOnRecommendations();
+        redirectUserBasedOnUserData();
       } catch (error) {
         console.error("Error setting tokens in localStorage:", error);
         setError("An error occurred while processing your request.");
@@ -44,6 +36,7 @@ const HandleSpotifyToken = () => {
       setError("Missing necessary authorization information.");
     }
   }, [router, user?.recommendations]); // Depend on user.recommendations to re-evaluate when it changes
+
 
   return (
     <div>
