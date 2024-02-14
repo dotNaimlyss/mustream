@@ -62,7 +62,8 @@ def recommend_songs(user_like_genres, user_like_artists, top_k=10):
     embedding_size = 50  # Example size
 
     model = SongRecommender(num_songs, num_genres, num_artists, embedding_size)
-
+    model_path = 'mustream_recommender_model.pth'
+    torch.save(model.state_dict(), model_path)
     # Define a simple training loop
     criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
