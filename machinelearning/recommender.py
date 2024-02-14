@@ -129,15 +129,3 @@ def recommend_songs(user_like_genres, user_like_artists, top_k=10):
 # recommendedsongs = recommend_songs(like_genres, like_artists)
 # print(recommendedsongs)
 
-import torch
-import torch.onnx
-
-# Load the pre-trained PyTorch model
-model = torch.load('mustream-recommender.pth')
-model.eval()
-
-# Create dummy input matching the model input size, for example:
-dummy_input = torch.randn(1, 3, 224, 224)  # Adjust the size as necessary
-
-# Export the model
-torch.onnx.export(model, dummy_input, "mustream-recommender.onnx", export_params=True, opset_version=10)
