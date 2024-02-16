@@ -103,6 +103,7 @@ const Dashboard: React.FC = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(UserToFetch),
+        mode: 'no-cors'
       });
 
       if (response.ok) {
