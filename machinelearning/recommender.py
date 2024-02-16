@@ -7,7 +7,7 @@ import torch.optim as optim
 from bson import ObjectId
 
 connection_string = "mongodb+srv://thurein:yZvltzHCExQyT4Mw@cluster1.gd9wruo.mongodb.net/?retryWrites=true&w=majority"
-client = MongoClient(connection_string,  ssl=True, ssl_cert_reqs=ssl.CERT_NONE)
+client = MongoClient(connection_string,  ssl=True)
 db = client['MustreamDatabase']
 collection = db['tracks']
 data = collection.find()
