@@ -99,7 +99,7 @@ const Dashboard: React.FC = () => {
         like_artists: selectedArtists,
       };
 
-      const response = await fetch("http://localhost:4000/recommend", {
+      const response = await fetch("http://47.129.43.142:80/recommend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(UserToFetch),
