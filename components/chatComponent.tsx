@@ -25,7 +25,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({
   const socketRef = useRef<Socket | null>(null);
 
   useEffect(() => {
-    socketRef.current = io("https://54.151.204.146", { secure: true, rejectUnauthorized: false });
+    socketRef.current = io("http://54.151.204.146", { secure: true, rejectUnauthorized: false });
 
     socketRef.current.emit("join session", selectedTrack, selectedArtist);
     socketRef.current.on("chat message", (msg: ChatMessage) => {
