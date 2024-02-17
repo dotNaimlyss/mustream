@@ -25,7 +25,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({
   const socketRef = useRef<Socket | null>(null);
 
   useEffect(() => {
-    socketRef.current = io("https://mustream.vercel.app:3000", { secure: true, rejectUnauthorized: false });
+    socketRef.current = io("/", { secure: true, rejectUnauthorized: false });
 
     socketRef.current.emit("join session", selectedTrack, selectedArtist);
     socketRef.current.on("chat message", (msg: ChatMessage) => {
