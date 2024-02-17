@@ -14,7 +14,7 @@ const HandleSpotifyToken = () => {
     const { access_token, expires_in, refresh_token } = router.query;
     console.log(user)
     const redirectUserBasedOnUserData = () => {
-      if(user && (user.like_artists.length > 3 || user.like_genres.length >3)){
+      if(user && (user.like_artists.length >= 3 || user.like_genres.length >=3)){
         router.push('/HomePage');
       }else router.push('/dashboard');
     };
