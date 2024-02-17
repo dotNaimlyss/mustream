@@ -41,6 +41,6 @@ app.prepare().then(() => {
   });
 
   httpServer.listen(port, () => {
-    console.log(`> Ready on http://localhost:${port}`);
+    console.log(`> Ready`);
   });
 });
