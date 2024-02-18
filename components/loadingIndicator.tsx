@@ -17,8 +17,10 @@ export const LoadingIndicator = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-primary">
-      <div className="text-white text-4xl">Loading {loadingChar}</div>
+    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+      <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
+        <div className="text-white text-4xl">{loadingChar}</div>
+      </div>
     </div>
   );
 };
