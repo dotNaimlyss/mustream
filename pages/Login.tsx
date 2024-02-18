@@ -46,13 +46,12 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    redirectToSpotifyAuthorization();
+
     const response = await fetch("/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
     });
-    console.log(response)
     if (response.ok) {
       const { token } = await response.json();
       localStorage.setItem("token", token);
@@ -74,6 +73,7 @@ const LoginForm = () => {
           searched_songs: decodedToken.searched_songs,
         })
       );
+      // redirectToSpotifyAuthorization();
 
     } else {
       const error = await response.json();
