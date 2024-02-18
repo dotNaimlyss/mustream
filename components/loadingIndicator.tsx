@@ -16,5 +16,9 @@ export const LoadingIndicator = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  return <div>Loading {loadingChar}</div>;
+  return (
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-primary">
+      <div className="text-white text-4xl">Loading {loadingChar}</div>
+    </div>
+  );
 };

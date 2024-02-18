@@ -9,9 +9,13 @@ import { LoadingIndicator } from "../components/loadingIndicator";
 const HomePage: React.FC = () => {
   const [recommendedSongs, setRecommendedSongs] = useState<ITrack[]>([]);
   const user = useSelector((state: RootState) => state.user.user);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<{ isError: Boolean; error: string }>({
-    isError: false,
+  const [loading, setLoading] = useState<{
+    hasError: Boolean;
+    isLoading: Boolean;
+    error: string;
+  }>({
+    hasError: false,
+    isLoading: false,
     error: "",
   });
 
@@ -21,7 +25,11 @@ const HomePage: React.FC = () => {
       //   console.error("This user is not registered or user ID is missing");
       //   return;
       // }
-      setLoading(true);
+      setLoading({
+        hasError: false,
+        isLoading: false,
+        error: "",
+      });
       try {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -39,17 +47,13 @@ const HomePage: React.FC = () => {
         if (response.ok) {
           const data = await response.json();
           setRecommendedSongs(data.recommended_songs || []);
+          setLoading({ hasError: false, isLoading: false, error: "" });
         } else {
-          console.error(
-            "Failed to fetch recommendations:",
-            response.statusText
-          );
+          throw "Failed to fetch recommendations:";
         }
       } catch (error) {
         console.error("Couldn't fetch recommendations for user:", error);
-        setError({ isError: true, error: error.message });
-      } finally {
-        setLoading(false);
+        setLoading({ hasError: true, isLoading: false, error: error.message });
       }
     };
 
@@ -58,12 +62,12 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="relative">
-      <h1 className="text-2xl font-semibold text-gray-700 mb-4">
+      <h1 className="text-2xl font-semibold text-gray-700 mb-4 bg-primary">
         Song Tracks you may like!!
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {!loading ? (
-          error.isError ? (
+        {!loading.isLoading ? (
+          loading.hasError ? (
             <div />
           ) : (
             recommendedSongs.map((recommendation, index) => (
@@ -81,7 +85,7 @@ const HomePage: React.FC = () => {
             ))
           )
         ) : (
-          <div><LoadingIndicator/></div>
+          <LoadingIndicator />
         )}
       </div>
       <SearchComponent />
