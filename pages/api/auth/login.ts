@@ -28,9 +28,9 @@ export default async function handler(req, res) {
           {
             expiresIn: "1h", // token will expire in 1 hour
           }
-          console.log(user)
-        );
 
+        );
+        console.log(user)
         // Return user and token
         res.status(200).json({ token });
       } else {
