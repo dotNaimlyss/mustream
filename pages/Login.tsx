@@ -52,7 +52,7 @@ const LoginForm = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
     });
-
+    console.log(response)
     if (response.ok) {
       const { token } = await response.json();
       localStorage.setItem("token", token);
