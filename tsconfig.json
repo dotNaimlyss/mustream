@@ -8,7 +8,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-    "noEmit": true,
+    "noEmit": false, // Changed to false to enable JS file emission
     "incremental": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,

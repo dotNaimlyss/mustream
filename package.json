@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "ts-node server.ts",
     "build": "next build",
-    "build:server": "tsc",
+    "build:server": "tsc --outDir ./dist",
     "start": "next start",
     "lint": "next lint"
   },
