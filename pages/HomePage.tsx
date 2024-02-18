@@ -85,7 +85,9 @@ const HomePage: React.FC = () => {
             ))
           )
         ) : (
+          <div>
           <LoadingIndicator />
+          </div>
         )}
       </div>
       <SearchComponent />
