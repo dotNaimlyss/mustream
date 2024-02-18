@@ -10,7 +10,7 @@ export const LoadingIndicator = () => {
     const intervalId = setInterval(() => {
       setLoadingChar(chars[charIndex]);
       charIndex = (charIndex + 1) % chars.length;
-    }, 400); // Update every 100ms
+    }, 300); // Update every 100ms
 
     // Clear the interval when the component is unmounted
     return () => clearInterval(intervalId);
