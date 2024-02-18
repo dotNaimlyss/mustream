@@ -4,6 +4,7 @@ import SearchComponent from "../components/searchComponent";
 import { handleSongClick } from "../lib/songClick";
 import type { RootState } from "../redux/store";
 import type { ITrack } from "../models/Track";
+import { LoadingIndicator } from "../components/loadingIndicator";
 
 const HomePage: React.FC = () => {
   const [recommendedSongs, setRecommendedSongs] = useState<ITrack[]>([]);
@@ -80,7 +81,7 @@ const HomePage: React.FC = () => {
             ))
           )
         ) : (
-          <div>Loading...</div>
+          <div><LoadingIndicator/></div>
         )}
       </div>
       <SearchComponent />
