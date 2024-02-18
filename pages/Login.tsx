@@ -73,7 +73,7 @@ const LoginForm = () => {
           searched_songs: decodedToken.searched_songs,
         })
       );
-      // redirectToSpotifyAuthorization();
+      redirectToSpotifyAuthorization();
 
     } else {
       const error = await response.json();
