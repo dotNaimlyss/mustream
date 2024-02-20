@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/userSlice";
 import { User } from "../redux/userSlice";
-import Link from "next/link";
 type FormState = "login" | "signup" | null;
 
 export default function Home() {
@@ -12,7 +11,7 @@ export default function Home() {
   const router = useRouter();
   const handleSubmit = () => {
     const userData: User = {
-      username : username + "(Guest)",
+      username : username + ".Guest",
       like_artists: [],
       like_genres: [],
       _id: undefined,
