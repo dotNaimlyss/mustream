@@ -251,7 +251,7 @@ const SessionPage: React.FC = () => {
           selectedArtist={decodedArtistName}
           currentUser={user?.username as string}
         />
-        <NextMusicSession />
+        {/* <NextMusicSession /> */}
       </div>
     </div>
   );
