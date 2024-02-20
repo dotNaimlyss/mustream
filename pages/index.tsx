@@ -11,7 +11,7 @@ export default function Home() {
   const router = useRouter();
   const handleSubmit = () => {
     const userData: User = {
-      username : username + " - Guest",
+      username : username + "-Guest",
       like_artists: [],
       like_genres: [],
       _id: undefined,
